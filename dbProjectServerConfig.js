@@ -16,8 +16,8 @@ app.use(express.static('public'));
 // Page handlers
 app.get('/',function(req,res){
   var context = {};
-  context.pageTitle = "Mexico 2018";
-  res.render('pageMain', context);
+  context.pageTitle = "Index";
+  res.render('index1', context);
 });
 
 app.get('/gardeners',function(req,res){
@@ -34,7 +34,7 @@ app.get('/sites',function(req,res){
 
 app.get('/accesses',function(req,res){
   var context = {};
-  context.pageTitle = "Tulum, Quintana Roo";
+  context.pageTitle = "🔑 Accesses";
   res.render('accesses', context);
 });
 

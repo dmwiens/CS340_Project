@@ -1,0 +1,70 @@
+body {
+	background: url(/img/backgroundDark2.jpg); 
+	background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+	background-size: 100% 100%;
+	background-color: black;
+
+	font-family: Helvetica;
+	color: lightgrey;
+
+	padding-left: 25%;
+	padding-right: 25%;
+}
+
+.container
+{
+	padding-left: 10%;
+	padding-right: 10%;
+}
+
+button
+{
+	color: black;
+}
+
+h1
+{
+	color: white;
+}
+
+
+nav a
+{
+	color: lightgrey;
+}
+
+
+#cityTemp
+{
+	color: orange;
+}
+
+.photo
+{
+	width:100%;
+	padding-top: 10px;
+	padding-bottom: 5px;
+}
+
+
+.scrollingtextbox
+{
+	height:120px;
+	width:120px;
+	border:1px solid #ccc;
+	font:16px/26px Georgia, Garamond, Serif;
+	overflow:auto;
+}
+
+
+footer{
+	text-align: center;
+	padding-top: 30px;
+}
+
+footer a
+{
+	color: lightgrey;
+}
