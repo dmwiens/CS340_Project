@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>title</title>
+	</head>
+	<body>
+	<!-- Reference http://unicode.org/emoji/charts/full-emoji-list.html -->
+	<h1>👨‍🌾 Gardeners</h1>
+
+	<form action="gardeners.html" method="POST">
+		<fieldset>
+			<legend>ADD NEW GARDENER</legend>
+			<div>
+				<label>First Name: </label>
+				<input type="text" id="fname">
+			</div>
+			<div>
+				<label>Last Name: </label>
+				<input type="text" id="lname">
+			</div>
+			<div>
+				<input type="submit" value="Add Gardener">
+			</div>
+		</fieldset>
+	</form>
+
+	<table>
+		<caption>Current Gardeners</caption>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+		<tr>
+			<td>David</td>
+			<td>Wiens</td>
+			<td><button onclick="deletePerson({{id}})">DELETE</button></td>
+            <td><a href="gardeners_update.html">UPDATE</a></td>
+		</tr>
+		<tr>
+			<td>Jim</td>
+			<td>Foo</td>
+			<td><button onclick="deletePerson({{id}})">DELETE</button></td>
+            <td><a href="gardeners_update.html">UPDATE</a></td>
+		</tr>
+	</table>
+
+	</body>
+</html>
