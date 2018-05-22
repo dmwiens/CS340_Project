@@ -1,2 +1,0 @@
-
-weatherFeature("Palenque, MX");

@@ -1,2 +1,0 @@
-
-weatherFeature("Tulum, MX");

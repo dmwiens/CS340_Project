@@ -17,10 +17,28 @@
 
 <table>
 	<caption>Current Gardeners</caption>
-	<tr>
-		<th>First Name</th>
-		<th>Last Name</th>
-	</tr>
+	<thead>
+		<tr>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each gardeners}}
+		<tr>
+			<td>{{fname}}</td>
+			<td>{{lname}}</td>
+            <td><button onclick="deleteGardener({{id}})">Delete</button></td>
+			<!--
+			<td><button onclick="deletePerson({{id}})">DELETE{{id}}</button></td>
+			<td><a href="gardener_update.html">UPDATE{{id}}</a></td>
+			-->
+		</tr>
+		{{/each}}
+	</tbody>
+
+
+	<!--
 	<tr>
 		<td>David</td>
 		<td>Wiens</td>
@@ -33,4 +51,5 @@
 		<td><button onclick="deletePerson({{id}})">DELETE</button></td>
 		<td><a href="gardener_update.html">UPDATE</a></td>
 	</tr>
+	-->
 </table>
