@@ -91,14 +91,14 @@ module.exports = function(){
 
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO bsg_people (fname, lname, homeworld, age) VALUES (?,?,?,?)";
-        var inserts = [req.body.fname, req.body.lname, req.body.homeworld, req.body.age];
+        var sql = "INSERT INTO gardener (fname, lname) VALUES (?,?)";
+        var inserts = [req.body.fname, req.body.lname];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                res.redirect('/people');
+                res.redirect('/gardeners');
             }
         });
     });
