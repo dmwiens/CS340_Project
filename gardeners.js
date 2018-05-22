@@ -27,21 +27,22 @@ module.exports = function(){
     }
 
 
+    */
 
-    function getPerson(res, mysql, context, id, complete){
-        var sql = "SELECT id, fname, lname, homeworld, age FROM bsg_people WHERE id = ?";
+    function getGardener(res, mysql, context, id, complete){
+        var sql = "SELECT id, fname, lname FROM gardener WHERE id = ?";
         var inserts = [id];
+
         mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.person = results[0];
+            context.gardener = results[0];
             complete();
         });
     }
 
-    */
 
     /*Display all gardeners. Requires web based javascript to delete users with AJAX*/
 
@@ -69,25 +70,24 @@ module.exports = function(){
         }
     });
 
-    /* Display one person for the specific purpose of updating people */
+    /* Display one gardener for the specific purpose of updating gardeners */
 
     router.get('/:id', function(req, res){
+        
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["selectedplanet.js", "updateperson.js"];
+        context.jsscripts = ["updategardener.js"];
         var mysql = req.app.get('mysql');
-        getPerson(res, mysql, context, req.params.id, complete);
-        getPlanets(res, mysql, context, complete);
+        getGardener(res, mysql, context, req.params.id, complete);
         function complete(){
             callbackCount++;
-            if(callbackCount >= 2){
-                res.render('update-person', context);
+            if(callbackCount >= 1){
+                res.render('gardener_update', context);
             }
-
         }
     });
 
-    /* Adds a person, redirects to the people page after adding */
+    /* Adds a gardener, redirects to the people page after adding */
 
     router.post('/', function(req, res){
         var mysql = req.app.get('mysql');
@@ -103,12 +103,12 @@ module.exports = function(){
         });
     });
 
-    /* The URI that update data is sent to in order to update a person */
+    /* The URI that update data is sent to in order to update a gardener */
 
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE bsg_people SET fname=?, lname=?, homeworld=?, age=? WHERE id=?";
-        var inserts = [req.body.fname, req.body.lname, req.body.homeworld, req.body.age, req.params.id];
+        var sql = "UPDATE gardener SET fname=?, lname=? WHERE id=?";
+        var inserts = [req.body.fname, req.body.lname, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
