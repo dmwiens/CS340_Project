@@ -14,8 +14,8 @@ app.set('port', 3000);
 app.set('mysql', mysql);
 
 
-app.use('/sites', require('./sites.js'));
 app.use('/gardeners', require('./gardeners.js'));
+app.use('/sites', require('./sites.js'));
 
 // Page handlers
 app.get('/',function(req,res){
