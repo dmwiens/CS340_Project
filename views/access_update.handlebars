@@ -3,7 +3,7 @@
 		<legend>🔑 UPDATE ACCESS</legend>
 		<div>
 			<label>Gardener: </label>
-			<select name="gardener">
+			<select name="gardener" id="access-gardener-selector">
 				{{#each gardeners}}
 				<option value="{{id}}">{{fname}} {{lname}}</option>
 				{{/each}}
@@ -11,7 +11,7 @@
 		</div>
 		<div>
 			<label>Site: </label>
-			<select name="site">
+			<select name="site" id="access-site-selector">
 				{{#each sites}}
 				<option value="{{id}}">{{name}}</option>
 				{{/each}}
@@ -21,3 +21,5 @@
 </form>
 <button onclick="updateAccess({{access.id}})">Update</button>
 <a href="/accesses">CANCEL</a>
+<script defer>selectGardener({{access.gid}});</script>
+<script defer>selectSite({{access.sid}});</script>

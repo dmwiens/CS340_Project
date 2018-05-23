@@ -28,7 +28,7 @@ module.exports = function(){
 
     
     function getAccesses(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, gardener, site FROM gardener_site", function(error, results, fields){
+        mysql.pool.query("SELECT GS.id, GS.gardener, GS.site, G.id AS gid, G.fname, G.lname, S.id AS sid, S.name FROM `gardener_site` GS INNER JOIN gardener G ON G.id = GS.gardener INNER JOIN site S ON S.id = GS.site", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -81,7 +81,7 @@ module.exports = function(){
         
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updateaccess.js"];
+        context.jsscripts = ["updateaccess.js",  "selectgardenersite.js"];
         var mysql = req.app.get('mysql');
         getGardeners(res, mysql, context, complete);
         getSites(res, mysql, context, complete);
