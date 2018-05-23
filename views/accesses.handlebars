@@ -1,44 +1,45 @@
-<form action="accesses.html" method="POST">
+<form action="/accesses" method="post">
 	<fieldset>
-		<legend>ADD NEW ACCESS</legend>
+		<legend>ADD NEW ACCESS FOR A GARDENER</legend>
 		<div>
 			<label>Gardener: </label>
-			<select name="Gardener">
-				<option value="1">David Wiens</option> 
-				<option value="2">Ruby Reitz</option>
-				<option value="3">Jim Foo</option>
+			<select name="gardener">
+				{{#each gardeners}}
+				<option value="{{id}}">{{fname}} {{lname}}</option>
+				{{/each}}
 			</select>
 		</div>
 		<div>
 			<label>Site: </label>
-			<select name="Site">
-				<option value="1">Home Garden</option> 
-				<option value="2">Everret Street Community Garden</option>
-				<option value="3">Neighbors</option>
+			<select name="site">
+				{{#each sites}}
+				<option value="{{id}}">{{name}}</option>
+				{{/each}}
 			</select>
 		</div>
 		<div>
-			<input type="submit" value="Add Access relationship">
+			<input type="submit" value="Add Access">
 		</div>
 	</fieldset>
 </form>
 
+
 <table>
 	<caption>Current Accesses</caption>
-	<tr>
-		<th>Gardener</th>
-		<th>Site</th>
-	</tr>
-	<tr>
-		<td>David Wiens</td>
-		<td>Home Garden</td>
-		<td><button onclick="deleteAccess({{id}})">DELETE</button></td>
-		<td><a href="access_update.html">UPDATE</a></td>
-	</tr>
-	<tr>
-		<td>Ruby Reitz</td>
-		<td>Home Garden</td>
-		<td><button onclick="deleteAccess({{id}})">DELETE</button></td>
-		<td><a href="access_update.html">UPDATE</a></td>
-	</tr>
+	<thead>
+		<tr>
+			<th>Gardener</th>
+			<th>Site</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each accesses}}
+		<tr>
+			<td>{{fname}} {{lname}}</td>
+			<td>{{name}}</td>
+            <td><button onclick="deleteSite({{id}})">Delete</button></td>
+            <td><a href="/accesses/{{id}}">Update</a></td>
+		</tr>
+		{{/each}}
+	</tbody>
 </table>

@@ -16,6 +16,8 @@ app.set('mysql', mysql);
 
 app.use('/gardeners', require('./gardeners.js'));
 app.use('/sites', require('./sites.js'));
+app.use('/accesses', require('./accesses.js'));
+
 
 // Page handlers
 app.get('/',function(req,res){
@@ -31,13 +33,13 @@ app.get('/sites',function(req,res){
   context.pageTitle = "🌐 Sites";
   res.render('sites', context);
 });
-*/
 
 app.get('/accesses',function(req,res){
   var context = {};
   context.pageTitle = "🔑 Accesses";
   res.render('accesses', context);
 });
+*/
 
 
 app.get('/f1AboutThisSite',function(req,res){
