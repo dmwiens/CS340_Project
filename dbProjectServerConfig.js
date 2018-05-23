@@ -13,8 +13,9 @@ app.use('/static', express.static('public'));
 app.set('port', 3000);
 app.set('mysql', mysql);
 
-app.use('/gardeners', require('./gardeners.js'));
 
+app.use('/sites', require('./sites.js'));
+app.use('/gardeners', require('./gardeners.js'));
 
 // Page handlers
 app.get('/',function(req,res){
@@ -25,18 +26,12 @@ app.get('/',function(req,res){
 
 
 /*
-app.get('/gardeners',function(req,res){
-  var context = {};
-  context.pageTitle = "👨‍🌾 Gardeners";
-  res.render('gardeners', context);
-});
-*/
-
 app.get('/sites',function(req,res){
   var context = {};
   context.pageTitle = "🌐 Sites";
   res.render('sites', context);
 });
+*/
 
 app.get('/accesses',function(req,res){
   var context = {};

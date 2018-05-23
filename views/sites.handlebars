@@ -1,35 +1,35 @@
-<form action="sites.html" method="POST">
+<form action="/sites" method="post">
 	<fieldset>
 		<legend>ADD NEW SITE</legend>
 		<div>
 			<label>Name: </label>
-			<input type="text" id="fname">
+			<input type="text" name="name">
 		</div>
 		<div>
 			<label>Length: </label>
-			<input type="number" id="length">
+			<input type="number" name="length">
 		</div>
 		<div>
 			<label>Width: </label>
-			<input type="number" id="width">
+			<input type="number" name="width">
 		</div>
 		<fieldset>
 			<legend>Address</legend>
 			<div>
 				<label>Street: </label>
-				<input type="text" id="street">
+				<input type="text" name="addr_street">
 			</div>
 			<div>
 				<label>City: </label>
-				<input type="text" id="city">
+				<input type="text" name="addr_city">
 			</div>
 			<div>
 				<label>State: </label>
-				<input type="text" id="state">
+				<input type="text" name="addr_state">
 			</div>
 			<div>
 				<label>ZIP: </label>
-				<input type="number" id="zip">
+				<input type="number" name="addr_zip">
 			</div>
 		</fieldset>
 		<div>
@@ -38,26 +38,33 @@
 	</fieldset>
 </form>
 
+
 <table>
 	<caption>Current Sites</caption>
-	<tr>
-		<th>Name</th>
-		<th>Length</th>
-		<th>Width</th>
-		<th>Addr. Street</th>
-		<th>Addr. City</th>
-		<th>Addr. State</th>
-		<th>Addr. ZIP</th>
-	</tr>
-	<tr>
-		<td>Home Garden</td>
-		<td>70</td>
-		<td>50</td>
-		<td>134 NE 79th St.</td>
-		<td>Portland</td>
-		<td>OR</td>
-		<td>97213</td>
-		<td><button onclick="deleteSite({{id}})">DELETE</button></td>
-		<td><a href="site_update.html">UPDATE</a></td>
-	</tr>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Length</th>
+			<th>Width</th>
+			<th>Street</th>
+			<th>City</th>
+			<th>State</th>
+			<th>ZIP</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each sites}}
+		<tr>
+			<td>{{name}}</td>
+			<td>{{length}}</td>
+			<td>{{width}}</td>
+			<td>{{addr_street}}</td>
+			<td>{{addr_city}}</td>
+			<td>{{addr_state}}</td>
+			<td>{{addr_zip}}</td>
+            <td><button onclick="deleteSite({{id}})">Delete</button></td>
+            <td><a href="/sites/{{id}}">Update</a></td>
+		</tr>
+		{{/each}}
+	</tbody>
 </table>

@@ -3,20 +3,20 @@ module.exports = function(){
     var router = express.Router();
 
 
-    function getGardeners(res, mysql, context, complete){
-        mysql.pool.query("SELECT id, fname, lname FROM gardener", function(error, results, fields){
+    function getSites(res, mysql, context, complete){
+        mysql.pool.query("SELECT id, name, length, width, addr_street, addr_city, addr_state, addr_zip FROM site", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.gardeners = results;
+            context.sites = results;
             complete();
         });
     }
 
 
-    function getGardener(res, mysql, context, id, complete){
-        var sql = "SELECT id, fname, lname FROM gardener WHERE id = ?";
+    function getSite(res, mysql, context, id, complete){
+        var sql = "SELECT id, name, length, width, addr_street, addr_city, addr_state, addr_zip FROM site WHERE id = ?";
         var inserts = [id];
 
         mysql.pool.query(sql, inserts, function(error, results, fields){
@@ -24,72 +24,72 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.gardener = results[0];
+            context.site = results[0];
             complete();
         });
     }
 
 
-    /*Display all gardeners. Requires web based javascript to delete users with AJAX*/
+    /*Display all sites. Requires web based javascript to delete sites with AJAX*/
 
     router.get('/', function(req, res){
-        
+
         var callbackCount = 0;
         var context = {};
-        context.pageTitle = "👨‍🌾 Gardeners";
-        context.jsscripts = ["deletegardener.js"];
+        context.pageTitle = "🌐 Sites";
+        context.jsscripts = ["deletesite.js"];
         var mysql = req.app.get('mysql');
-        getGardeners(res, mysql, context, complete);
+        getSites(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
-                res.render('gardeners', context);
+                res.render('sites', context);
             }
 
         }
     });
 
-    /* Display one gardener for the specific purpose of updating gardeners */
+    /* Display one site for the specific purpose of updating sites */
 
     router.get('/:id', function(req, res){
         
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updategardener.js"];
+        context.jsscripts = ["updatesite.js"];
         var mysql = req.app.get('mysql');
-        getGardener(res, mysql, context, req.params.id, complete);
+        getSite(res, mysql, context, req.params.id, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
-                res.render('gardener_update', context);
+                res.render('site_update', context);
             }
         }
     });
 
-    /* Adds a gardener, redirects to the gardeners page after adding */
+    /* Adds a site, redirects to the sites page after adding */
 
     router.post('/', function(req, res){
-        console.log("posted name is " + req.body.fname);
-
+        console.log("posted name is " + req.body.name);
+        
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO gardener (fname, lname) VALUES (?,?)";
-        var inserts = [req.body.fname, req.body.lname];
+        var sql = "INSERT INTO site (name, length, width, addr_street, addr_city, addr_state, addr_zip) VALUES (?,?,?,?,?,?,?)";
+        var inserts = [req.body.name, req.body.length, req.body.width, req.body.addr_street, req.body.addr_city, req.body.addr_state, req.body.addr_zip];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                res.redirect('/gardeners');
+                res.redirect('/sites');
             }
         });
     });
 
-    /* The URI that update data is sent to in order to update a gardener */
+    /* The URI that update data is sent to in order to update a site */
 
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE gardener SET fname=?, lname=? WHERE id=?";
-        var inserts = [req.body.fname, req.body.lname, req.params.id];
+        var sql = "UPDATE site SET name=?, length=?, width=?, addr_street=?, addr_city=?, addr_state=?, addr_zip=? WHERE id=?";
+        var inserts = [req.body.name, req.body.length, req.body.width, req.body.addr_street, req.body.addr_city, req.body.addr_state, req.body.addr_zip, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -101,11 +101,11 @@ module.exports = function(){
         });
     });
 
-    /* Route to delete a gardener, simply returns a 202 upon success. Ajax will handle this. */
+    /* Route to delete a site, simply returns a 202 upon success. Ajax will handle this. */
 
     router.delete('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM gardener WHERE id = ?";
+        var sql = "DELETE FROM site WHERE id = ?";
         var inserts = [req.params.id];
         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
