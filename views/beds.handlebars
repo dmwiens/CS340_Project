@@ -3,7 +3,7 @@
 		<legend>ADD NEW GARDEN BED</legend>
 		<div>
 			<label>Name: </label>
-			<input type="text" name="bname">
+			<input type="text" name="name">
 		</div>
 		<div>
 			<label>Site: </label>
@@ -15,11 +15,11 @@
 		</div>
 		<div>
 			<label>Length: </label>
-			<input type="number" name="blength">
+			<input type="number" name="length">
 		</div>
 		<div>
 			<label>Width: </label>
-			<input type="number" name="bwidth">
+			<input type="number" name="width">
 		</div>
 		<div>
 			<label>Location, X: </label>
@@ -51,10 +51,10 @@
 	<tbody>
 		{{#each beds}}
 		<tr>
-			<td>{{bname}}</td>
+			<td>{{name}}</td>
 			<td>{{sname}}</td>
-			<td>{{blength}}</td>
-			<td>{{bwidth}}</td>
+			<td>{{length}}</td>
+			<td>{{width}}</td>
 			<td>{{location_x}}</td>
 			<td>{{location_y}}</td>
             <td><button onclick="deleteBed({{id}})">Delete</button></td>

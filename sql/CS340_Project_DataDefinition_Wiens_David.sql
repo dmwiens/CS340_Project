@@ -84,14 +84,14 @@ CREATE TABLE `workshift` (
 
 CREATE TABLE `bed` (
   `id` INT(11) UNSIGNED AUTO_INCREMENT NOT NULL,
-  `bname` VARCHAR(255) UNIQUE KEY NOT NULL,
+  `name` VARCHAR(255) UNIQUE KEY NOT NULL,
   `site` INT(11) UNSIGNED NOT NULL,
-  `blength` INT(11) UNSIGNED NOT NULL,
-  `bwidth` INT(11) UNSIGNED NOT NULL,
+  `length` INT(11) UNSIGNED NOT NULL,
+  `width` INT(11) UNSIGNED NOT NULL,
   `location_x` INT(11) UNSIGNED NOT NULL,
   `location_y` INT(11) UNSIGNED NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `dimensions` (`bname`,`blength`,`bwidth`,`location_x`,`location_y`),
+  UNIQUE KEY `dimensions` (`name`,`length`,`width`,`location_x`,`location_y`),
   FOREIGN KEY (`site`) REFERENCES `site`(`id`) ON UPDATE CASCADE ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
@@ -200,7 +200,7 @@ INSERT INTO `workshift`(`id`, `gardener`, `site`, `date`, `hours_worked`) VALUES
 -- Data for table `bed`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `bed`(`id`, `bname`, `site`, `blength`, `bwidth`, `location_x`, `location_y`) VALUES 
+INSERT INTO `bed`(`id`, `name`, `site`, `length`, `width`, `location_x`, `location_y`) VALUES 
 (1, 'Yardcorner plot', 1, 10, 10, 50, 10),
 (2, 'Fenceline box', 1, 10, 1, 10, 10),
 (3, 'Metal dirt-filled tub', 2, 20, 20, 20, 20),

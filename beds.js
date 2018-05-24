@@ -15,7 +15,7 @@ module.exports = function(){
     }
 
     function getBeds(res, mysql, context, complete){
-        mysql.pool.query("SELECT B.id, B.bname, B.site, S.name AS sname, B.blength, B.bwidth, B.location_x, B.location_y FROM bed B \
+        mysql.pool.query("SELECT B.id, B.name, B.site, S.name AS sname, B.length, B.width, B.location_x, B.location_y FROM bed B \
                         INNER JOIN site S ON B.site = S.id", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -28,7 +28,7 @@ module.exports = function(){
 
 
     function getBed(res, mysql, context, id, complete){
-        var sql = "SELECT id, bname, site, blength, bwidth, location_x, location_y FROM bed WHERE id = ?";
+        var sql = "SELECT id, name, site, length, width, location_x, location_y FROM bed WHERE id = ?";
         var inserts = [id];
 
         mysql.pool.query(sql, inserts, function(error, results, fields){
@@ -86,8 +86,8 @@ module.exports = function(){
     router.post('/', function(req, res){
         
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO bed (bname, site, blength, bwidth, location_x, location_y) VALUES (?,?,?,?,?,?)";
-        var inserts = [req.body.bname, req.body.site, req.body.blength, req.body.bwidth, req.body.location_x, req.body.location_y];
+        var sql = "INSERT INTO bed (name, site, length, width, location_x, location_y) VALUES (?,?,?,?,?,?)";
+        var inserts = [req.body.name, req.body.site, req.body.length, req.body.width, req.body.location_x, req.body.location_y];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -102,8 +102,8 @@ module.exports = function(){
 
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE bed SET bname=?, site=?, blength=?, bwidth=?, location_x=?, location_y=? WHERE id=?";
-        var inserts = [req.body.bname, req.body.site, req.body.blength, req.body.bwidth, req.body.location_x, req.body.location_y, req.params.id];
+        var sql = "UPDATE bed SET name=?, site=?, length=?, width=?, location_x=?, location_y=? WHERE id=?";
+        var inserts = [req.body.name, req.body.site, req.body.length, req.body.width, req.body.location_x, req.body.location_y, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
