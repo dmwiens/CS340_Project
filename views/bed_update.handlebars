@@ -1,0 +1,36 @@
+<form id="bed_update_form" action="/beds" method="put">
+	<fieldset>
+		<legend>🌱 UPDATE {{bed.bname}}</legend>
+		<div>
+			<label>Name: </label>
+			<input type="text" name="bname" value="{{bed.bname}}">
+		</div>
+		<div>
+			<label>Site: </label>
+			<select name="site" id="bed-site-selector">
+				{{#each sites}}
+				<option value="{{id}}">{{name}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div>
+			<label>Length: </label>
+			<input type="number" name="blength" value="{{bed.blength}}">
+		</div>
+		<div>
+			<label>Width: </label>
+			<input type="number" name="bwidth" value="{{bed.bwidth}}">
+		</div>
+		<div>
+			<label>Location, X: </label>
+			<input type="number" name="location_x" value="{{bed.location_x}}">
+		</div>
+		<div>
+			<label>Location, Y: </label>
+			<input type="number" name="location_y" value="{{bed.location_y}}">
+		</div>
+	</fieldset>
+</form>
+<button onclick="updateBed({{bed.id}})">Update</button>
+<a href="/beds">CANCEL</a>
+<script defer>selectBedSite({{bed.site}});</script>

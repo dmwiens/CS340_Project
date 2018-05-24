@@ -69,7 +69,6 @@ module.exports = function(){
     /* Adds a gardener, redirects to the gardeners page after adding */
 
     router.post('/', function(req, res){
-        console.log("posted name is " + req.body.fname);
 
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO gardener (fname, lname) VALUES (?,?)";

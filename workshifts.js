@@ -93,7 +93,6 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 3){
-                console.log(context)
                 res.render('workshift_update', context);
             }
         }

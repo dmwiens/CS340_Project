@@ -1,0 +1,65 @@
+<form action="/beds" method="post">
+	<fieldset>
+		<legend>ADD NEW GARDEN BED</legend>
+		<div>
+			<label>Name: </label>
+			<input type="text" name="bname">
+		</div>
+		<div>
+			<label>Site: </label>
+			<select name="site">
+				{{#each sites}}
+				<option value="{{id}}">{{name}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div>
+			<label>Length: </label>
+			<input type="number" name="blength">
+		</div>
+		<div>
+			<label>Width: </label>
+			<input type="number" name="bwidth">
+		</div>
+		<div>
+			<label>Location, X: </label>
+			<input type="number" name="location_x">
+		</div>
+		<div>
+			<label>Location, Y: </label>
+			<input type="number" name="location_y">
+		</div>
+		<div>
+			<input type="submit" value="Add Site">
+		</div>
+	</fieldset>
+</form>
+
+
+<table>
+	<caption>Current Garden Beds</caption>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Site</th>
+			<th>Length</th>
+			<th>Width</th>
+			<th>Location, X</th>
+			<th>Location, Y</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each beds}}
+		<tr>
+			<td>{{bname}}</td>
+			<td>{{sname}}</td>
+			<td>{{blength}}</td>
+			<td>{{bwidth}}</td>
+			<td>{{location_x}}</td>
+			<td>{{location_y}}</td>
+            <td><button onclick="deleteBed({{id}})">Delete</button></td>
+            <td><a href="/beds/{{id}}">Update</a></td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>

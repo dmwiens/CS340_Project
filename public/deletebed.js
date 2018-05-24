@@ -1,6 +1,6 @@
-function deleteGardener(id){
+function deleteBed(id){
    $.ajax({
-        url: '/gardeners/' + id,
+        url: '/beds/' + id,
         type: 'DELETE',
         success: function(result){
             window.location.reload(true);
