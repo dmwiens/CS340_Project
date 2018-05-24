@@ -200,48 +200,49 @@ INSERT INTO `workshift`(`gardener`, `site`, `date`, `hours_worked`) VALUES
 -- Data for table `bed`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `bed`(`id`, `name`, `site`, `length`, `width`, `location_x`, `location_y`) VALUES 
-(1, 'Yardcorner plot', 1, 10, 10, 50, 10),
-(2, 'Fenceline box', 1, 10, 1, 10, 10),
-(3, 'Metal dirt-filled tub', 2, 20, 20, 20, 20),
-(4, 'Primary arable plot', 3, 30, 30, 10, 10);
+INSERT INTO `bed`(`name`, `site`, `length`, `width`, `location_x`, `location_y`) VALUES 
+('Yardcorner plot', (SELECT id FROM `site` WHERE name='Housey Gardens'), 10, 10, 50, 10),
+('Fenceline box', (SELECT id FROM `site` WHERE name='Housey Gardens'), 10, 1, 10, 10),
+('Metal dirt-filled tub', (SELECT id FROM `site` WHERE name='Neighbor Garden'), 20, 20, 20, 20),
+('Primary arable plot', (SELECT id FROM `site` WHERE name='Montavilla Community Garden'), 30, 30, 10, 10);
 
 
 --
 -- Data for table `plant_variety`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `plant_variety`(`id`, `common_name`, `rec_plant_date`, `rec_harvest_date`, `cost`, `food_unit`) VALUES 
-(1, 'cabbage', '2000-05-01', '2000-08-01', '2.19', 'head'),
-(2, 'tomato', '2000-05-01', '2000-08-01', '0.90', 'tomato'),
-(3, 'thyme', '2000-05-01', '2000-08-01', '0.07', 'gram');
+INSERT INTO `plant_variety`(`common_name`, `rec_plant_date`, `rec_harvest_date`, `cost`, `food_unit`) VALUES 
+('cabbage', '2000-05-01', '2000-08-01', '2.19', 'head'),
+('tomato', '2000-05-01', '2000-08-01', '0.90', 'tomato'),
+('thyme', '2000-05-01', '2000-08-01', '0.07', 'gram');
 
 
 --
 -- Data for table `plant`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `plant`(`id`, `variety`, `bed`, `date_planted`, `date_dead`) VALUES 
-(1, 1, 1, '2018-04-01', NULL),
-(2, 1, 1, '2018-04-01', NULL),
-(3, 1, 1, '2018-04-01', NULL),
-(4, 2, 2, '2018-04-02', NULL),
-(5, 2, 2, '2018-04-02', NULL),
-(6, 3, 2, '2018-04-02', NULL),
-(7, 3, 2, '2018-04-15', NULL),
-(8, 3, 2, '2018-04-03', NULL),
-(9, 2, 3, '2018-04-15', NULL),
-(10, 3, 4, '2018-04-16', NULL);
+INSERT INTO `plant`(`variety`, `bed`, `date_planted`, `date_dead`) VALUES 
+((SELECT id FROM `plant_variety` WHERE common_name='cabbage'), (SELECT id FROM `bed` WHERE name='Yardcorner plot'), '2018-04-01', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='cabbage'), (SELECT id FROM `bed` WHERE name='Yardcorner plot'), '2018-04-01', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='cabbage'), (SELECT id FROM `bed` WHERE name='Yardcorner plot'), '2018-04-01', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='tomato'), (SELECT id FROM `bed` WHERE name='Fenceline box'), '2018-04-02', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='tomato'), (SELECT id FROM `bed` WHERE name='Fenceline box'), '2018-04-02', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='thyme'), (SELECT id FROM `bed` WHERE name='Fenceline box'), '2018-04-02', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='thyme'), (SELECT id FROM `bed` WHERE name='Fenceline box'), '2018-04-15', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='thyme'), (SELECT id FROM `bed` WHERE name='Fenceline box'), '2018-04-03', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='tomato'), (SELECT id FROM `bed` WHERE name='Metal dirt-filled tub'), '2018-04-15', NULL),
+((SELECT id FROM `plant_variety` WHERE common_name='thyme'), (SELECT id FROM `bed` WHERE name='Primary arable plot'), '2018-04-16', NULL);
 
 
 --
 -- Data for table `harvest`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `harvest`(`id`, `plant`, `date`, `yield`, `quality`) VALUES 
-(1, 5, '2018-07-31', 3, 7),
-(2, 2, '2018-08-01', 1, 10),
-(3, 1, '2018-08-03', 1, 1),
-(4, 7, '2018-08-27', 3, 5),
-(5, 10, '2018-09-31', 0.7, 7),
-(6, 2, '2018-10-01', 0.1, 2);
+-- Note insertion based on hard-coded primary key is only way, because no other attribures are unique
+INSERT INTO `harvest`(`plant`, `date`, `yield`, `quality`) VALUES 
+(5, '2018-07-31', 3, 7),
+(2, '2018-08-01', 1, 10),
+(1, '2018-08-03', 1, 1),
+(7, '2018-08-27', 3, 5),
+(10, '2018-09-31', 0.7, 7),
+(2, '2018-10-01', 0.1, 2);
