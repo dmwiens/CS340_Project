@@ -149,51 +149,51 @@ CREATE TABLE `harvest` (
 --
 
 
-INSERT INTO `gardener`(`id`, `fname`, `lname`) VALUES
-(1,'David','Wiens'),
-(2,'Ruby','Reitz'),
-(3,'Lesley','Neighbor'),
-(4,'Tedd','Neighbor');
+INSERT INTO `gardener`(`fname`, `lname`) VALUES
+('David','Wiens'),
+('Ruby','Reitz'),
+('Lesley','Neighbor'),
+('Tedd','Neighbor');
 
 
 --
 -- Data for table `site`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `site`(`id`, `name`, `length`, `width`, `addr_street`, `addr_city`, `addr_state`, `addr_zip`) VALUES
-(1,'Housey Gardens', 100, 70, '134 NE 79th Ave','Portland','OR','97213'),
-(2,'Neighbor Garden', 100, 80,'132 NE 79th Ave','Portland','OR','97213'),
-(3,'Montavilla Community Garden',200, 200, '202 NE 80th Ave','Portland','OR','97213');
+INSERT INTO `site`(`name`, `length`, `width`, `addr_street`, `addr_city`, `addr_state`, `addr_zip`) VALUES
+('Housey Gardens', 100, 70, '134 NE 79th Ave','Portland','OR','97213'),
+('Neighbor Garden', 100, 80,'132 NE 79th Ave','Portland','OR','97213'),
+('Montavilla Community Garden',200, 200, '202 NE 80th Ave','Portland','OR','97213');
 
 
 --
 -- Data for table `gardener_site`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `gardener_site`(`id`, `gardener`, `site`) VALUES 
-(1, 1, 1),
-(2, 1, 3),
-(3, 2, 1),
-(4, 2, 3),
-(5, 3, 2),
-(6, 3, 3),
-(7, 4, 2),
-(8, 4, 3);
+INSERT INTO `gardener_site`(`gardener`, `site`) VALUES 
+((SELECT id FROM gardener WHERE fname='David' AND lname='Wiens'), (SELECT id FROM `site` WHERE name='Housey Gardens')),
+((SELECT id FROM gardener WHERE fname='David' AND lname='Wiens'), (SELECT id FROM `site` WHERE name='Montavilla Community Garden')),
+((SELECT id FROM gardener WHERE fname='Ruby' AND lname='Reitz'), (SELECT id FROM `site` WHERE name='Housey Gardens')),
+((SELECT id FROM gardener WHERE fname='Ruby' AND lname='Reitz'), (SELECT id FROM `site` WHERE name='Montavilla Community Garden')),
+((SELECT id FROM gardener WHERE fname='Lesley' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Neighbor Garden')),
+((SELECT id FROM gardener WHERE fname='Lesley' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Montavilla Community Garden')),
+((SELECT id FROM gardener WHERE fname='Tedd' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Neighbor Garden')),
+((SELECT id FROM gardener WHERE fname='Tedd' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Montavilla Community Garden'));
 
 
 --
 -- Data for table `workshift`///////////////////////////////////////////////////////////////////////////
 --
-INSERT INTO `workshift`(`id`, `gardener`, `site`, `date`, `hours_worked`) VALUES 
-(1, 1, 1, '2018-03-03', 3),
-(2, 2, 1, '2018-03-03', 4),
-(3, 2, 1, '2018-03-15', 2),
-(4, 2, 1, '2018-03-31', 2),
-(5, 1, 1, '2018-04-01', 1),
-(6, 3, 3, '2018-04-15', 12),
-(7, 4, 3, '2018-04-15', 1),
-(8, 4, 2, '2018-04-15', 11),
-(9, 3, 2, '2018-04-16', 12);
+INSERT INTO `workshift`(`gardener`, `site`, `date`, `hours_worked`) VALUES 
+((SELECT id FROM gardener WHERE fname='David' AND lname='Wiens'), (SELECT id FROM `site` WHERE name='Housey Gardens'), '2018-03-03', 3),
+((SELECT id FROM gardener WHERE fname='Ruby' AND lname='Reitz'), (SELECT id FROM `site` WHERE name='Housey Gardens'), '2018-03-03', 4),
+((SELECT id FROM gardener WHERE fname='Ruby' AND lname='Reitz'), (SELECT id FROM `site` WHERE name='Housey Gardens'), '2018-03-15', 2),
+((SELECT id FROM gardener WHERE fname='Ruby' AND lname='Reitz'), (SELECT id FROM `site` WHERE name='Housey Gardens'), '2018-03-31', 2),
+((SELECT id FROM gardener WHERE fname='David' AND lname='Wiens'), (SELECT id FROM `site` WHERE name='Housey Gardens'), '2018-04-01', 1),
+((SELECT id FROM gardener WHERE fname='Lesley' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Montavilla Community Garden'), '2018-04-15', 12),
+((SELECT id FROM gardener WHERE fname='Tedd' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Montavilla Community Garden'), '2018-04-15', 1),
+((SELECT id FROM gardener WHERE fname='Tedd' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Neighbor Garden'), '2018-04-15', 11),
+((SELECT id FROM gardener WHERE fname='Lesley' AND lname='Neighbor'), (SELECT id FROM `site` WHERE name='Neighbor Garden'), '2018-04-16', 12);
 
 
 --
