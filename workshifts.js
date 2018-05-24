@@ -28,7 +28,7 @@ module.exports = function(){
 
     
     function getWorkshifts(res, mysql, context, complete){
-        mysql.pool.query("SELECT W.id, W.gardener, W.site, DATE_FORMAT(W.date, \"%Y-%c-%e\") AS date, W.hours_worked,\
+        mysql.pool.query("SELECT W.id, W.gardener, W.site, DATE_FORMAT(W.date, \"%Y-%m-%d\") AS date, W.hours_worked,\
                         G.id AS gid, G.fname, G.lname, S.id AS sid, S.name \
                         FROM `workshift` W \
                         INNER JOIN gardener G ON G.id = W.gardener \
@@ -44,7 +44,7 @@ module.exports = function(){
 
 
     function getWorkshift(res, mysql, context, id, complete){
-        var sql = "SELECT id, gardener, site, DATE_FORMAT(date, \"%Y-%c-%e\") AS date, hours_worked FROM workshift WHERE id = ?";
+        var sql = "SELECT id, gardener, site, DATE_FORMAT(date, \"%Y-%m-%d\") AS date, hours_worked FROM workshift WHERE id = ?";
         var inserts = [id];
 
         mysql.pool.query(sql, inserts, function(error, results, fields){
