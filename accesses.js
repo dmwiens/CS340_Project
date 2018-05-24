@@ -48,7 +48,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.site = results[0];
+            context.access = results[0];
             complete();
         });
     }
@@ -85,7 +85,7 @@ module.exports = function(){
         var mysql = req.app.get('mysql');
         getGardeners(res, mysql, context, complete);
         getSites(res, mysql, context, complete);
-        getAccesses(res, mysql, context, complete);
+        getAccess(res, mysql, context, req.params.id, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 3){
