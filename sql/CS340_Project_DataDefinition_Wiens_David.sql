@@ -42,7 +42,7 @@ CREATE TABLE `site` (
   `addr_street` VARCHAR(255) DEFAULT NULL,
   `addr_city` VARCHAR(255) DEFAULT NULL,
   `addr_state` VARCHAR(255) DEFAULT NULL,
-  `addr_zip` INT(11) UNSIGNED DEFAULT NULL,
+  `addr_zip` VARCHAR(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `address` (`addr_street`,`addr_city`,`addr_state`,`addr_zip`)
 ) ENGINE=InnoDB;
@@ -161,9 +161,9 @@ INSERT INTO `gardener`(`id`, `fname`, `lname`) VALUES
 --
 
 INSERT INTO `site`(`id`, `name`, `length`, `width`, `addr_street`, `addr_city`, `addr_state`, `addr_zip`) VALUES
-(1,'Housey Gardens', 100, 70, '134 NE 79th Ave','Portland','OR',97213),
-(2,'Neighbor Garden', 100, 80,'132 NE 79th Ave','Portland','OR',97213),
-(3,'Montavilla Community Garden',200, 200, '202 NE 80th Ave','Portland','OR',97213);
+(1,'Housey Gardens', 100, 70, '134 NE 79th Ave','Portland','OR','97213'),
+(2,'Neighbor Garden', 100, 80,'132 NE 79th Ave','Portland','OR','97213'),
+(3,'Montavilla Community Garden',200, 200, '202 NE 80th Ave','Portland','OR','97213');
 
 
 --
@@ -200,7 +200,7 @@ INSERT INTO `workshift`(`id`, `gardener`, `site`, `date`, `hours_worked`) VALUES
 -- Data for table `bed`///////////////////////////////////////////////////////////////////////////
 --
 
-INSERT INTO `bed`(`id`, `name`, `site`, `blength`, `bwidth`, `location_x`, `location_y`) VALUES 
+INSERT INTO `bed`(`id`, `bname`, `site`, `blength`, `bwidth`, `location_x`, `location_y`) VALUES 
 (1, 'Yardcorner plot', 1, 10, 10, 50, 10),
 (2, 'Fenceline box', 1, 10, 1, 10, 10),
 (3, 'Metal dirt-filled tub', 2, 20, 20, 20, 20),
