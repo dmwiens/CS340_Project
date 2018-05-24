@@ -17,6 +17,7 @@ app.set('mysql', mysql);
 app.use('/gardeners', require('./gardeners.js'));
 app.use('/sites', require('./sites.js'));
 app.use('/accesses', require('./accesses.js'));
+app.use('/workshifts', require('./workshifts.js'));
 
 
 // Page handlers

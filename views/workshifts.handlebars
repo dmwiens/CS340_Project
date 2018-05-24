@@ -1,0 +1,57 @@
+<form action="/workshifts" method="post">
+	<fieldset>
+		<legend>ADD NEW WORKSHIFT LOG FOR A GARDENER</legend>
+		<div>
+			<label>Gardener: </label>
+			<select name="gardener">
+				{{#each gardeners}}
+				<option value="{{id}}">{{fname}} {{lname}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div>
+			<label>Site: </label>
+			<select name="site">
+				{{#each sites}}
+				<option value="{{id}}">{{name}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div>
+			<label>Date: </label>
+			<input type="date" name="date">
+		</div>
+		<div>
+			<label>Hours worked: </label>
+			<input type="number" name="hours_worked">
+		</div>
+		<div>
+			<input type="submit" value="Add Workshift">
+		</div>
+	</fieldset>
+</form>
+
+
+<table>
+	<caption>Current Workshift Logs</caption>
+	<thead>
+		<tr>
+			<th>Gardener</th>
+			<th>Site</th>
+			<th>Date</th>
+			<th>Hours worked</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each workshifts}}
+		<tr>
+			<td>{{fname}} {{lname}}</td>
+			<td>{{name}}</td>
+			<td>{{date}}</td>
+			<td>{{hours_worked}}</td>
+            <td><button onclick="deleteWorkshift({{id}})">Delete</button></td>
+            <td><a href="/workshifts/{{id}}">Update</a></td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>

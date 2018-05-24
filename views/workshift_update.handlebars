@@ -1,0 +1,33 @@
+<form id="workshift_update_form" action="/workshifts" method="put">
+	<fieldset>
+		<legend>⏱ UPDATE WORKSHIFT</legend>
+		<div>
+			<label>Gardener: </label>
+			<select name="gardener" id="workshift-gardener-selector">
+				{{#each gardeners}}
+				<option value="{{id}}">{{fname}} {{lname}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div>
+			<label>Site: </label>
+			<select name="site" id="workshift-site-selector">
+				{{#each sites}}
+				<option value="{{id}}">{{name}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div>
+			<label>Date: </label>
+			<input type="date" name="date" value="{{workshift.date}}">
+		</div>
+		<div>
+			<label>Hours worked: </label>
+			<input type="number" name="hours_worked" value="{{workshift.hours_worked}}">
+		</div>
+	</fieldset>
+</form>
+<button onclick="updateWorkshift({{workshift.id}})">Update</button>
+<a href="/workshifts">CANCEL</a>
+<script defer>selectGardener({{workshift.gardener}});</script>
+<script defer>selectSite({{workshift.site}});</script>

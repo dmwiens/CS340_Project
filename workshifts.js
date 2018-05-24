@@ -27,23 +27,24 @@ module.exports = function(){
     }
 
     
-    function getAccesses(res, mysql, context, complete){
-        mysql.pool.query("SELECT GS.id, GS.gardener, GS.site, G.id AS gid, G.fname, G.lname, \
-                        S.id AS sid, S.name FROM `gardener_site` GS \
-                        INNER JOIN gardener G ON G.id = GS.gardener \
-                        INNER JOIN site S ON S.id = GS.site", function(error, results, fields){
+    function getWorkshifts(res, mysql, context, complete){
+        mysql.pool.query("SELECT W.id, W.gardener, W.site, W.date, W.hours_worked,\
+                        G.id AS gid, G.fname, G.lname, S.id AS sid, S.name \
+                        FROM `workshift` W \
+                        INNER JOIN gardener G ON G.id = W.gardener \
+                        INNER JOIN site S ON S.id = W.site", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.accesses = results;
+            context.workshifts = results;
             complete();
         });
     }
 
 
-    function getAccess(res, mysql, context, id, complete){
-        var sql = "SELECT id, gardener, site FROM gardener_site WHERE id = ?";
+    function getWorkshift(res, mysql, context, id, complete){
+        var sql = "SELECT id, gardener, site FROM workshift WHERE id = ?";
         var inserts = [id];
 
         mysql.pool.query(sql, inserts, function(error, results, fields){
@@ -51,76 +52,76 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.access = results[0];
+            context.workshift = results[0];
             complete();
         });
     }
 
 
-    /*Display all accesses. Requires web based javascript to delete accesses with AJAX*/
+    /*Display all workshifts. Requires web based javascript to delete workshift with AJAX*/
 
     router.get('/', function(req, res){
 
         var callbackCount = 0;
         var context = {};
-        context.pageTitle = "🔑 Accesses";
-        context.jsscripts = ["deleteaccess.js"];
+        context.pageTitle = "⏱ Workshifts";
+        context.jsscripts = ["deleteworkshift.js"];
         var mysql = req.app.get('mysql');
         getGardeners(res, mysql, context, complete);
         getSites(res, mysql, context, complete);
-        getAccesses(res, mysql, context, complete);
+        getWorkshifts(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 3){
-                res.render('accesses', context);
+                res.render('workshifts', context);
             }
 
         }
     });
 
-    /* Display one access for the specific purpose of updating accesses */
+    /* Display one workshift for the specific purpose of updating workshifts */
 
     router.get('/:id', function(req, res){
         
         callbackCount = 0;
         var context = {};
-        context.jsscripts = ["updateaccess.js",  "selectgardenersite.js"];
+        context.jsscripts = ["updateworkshift.js",  "selectwsgardenersite.js"];
         var mysql = req.app.get('mysql');
         getGardeners(res, mysql, context, complete);
         getSites(res, mysql, context, complete);
-        getAccess(res, mysql, context, req.params.id, complete);
+        getWorkshift(res, mysql, context, req.params.id, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 3){
-                res.render('access_update', context);
+                res.render('workshift_update', context);
             }
         }
     });
 
 
-    /* Adds an access, redirects to the accesses page after adding */
+    /* Adds a workshift, redirects to the workshifts page after adding */
 
     router.post('/', function(req, res){
         
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO gardener_site (gardener, site) VALUES (?,?)";
-        var inserts = [req.body.gardener, req.body.site];
+        var sql = "INSERT INTO workshift (gardener, site, date, hours_worked) VALUES (?,?,?,?)";
+        var inserts = [req.body.gardener, req.body.site, req.body.date, req.body.hours_worked];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                res.redirect('/accesses');
+                res.redirect('/workshifts');
             }
         });
     });
 
-    /* The URI that update data is sent to in order to update an access */
+    /* The URI that update data is sent to in order to update an workshift */
 
     router.put('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "UPDATE gardener_site SET gardener=?, site=? WHERE id=?";
-        var inserts = [req.body.gardener, req.body.site, req.params.id];
+        var sql = "UPDATE workshift SET gardener=?, site=?, date=?, hours_worked=? WHERE id=?";
+        var inserts = [req.body.gardener, req.body.site, req.body.date, req.body.hours_worked, req.params.id];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
@@ -132,11 +133,11 @@ module.exports = function(){
         });
     });
 
-    /* Route to delete an access, simply returns a 202 upon success. Ajax will handle this. */
+    /* Route to delete a workshift, simply returns a 202 upon success. Ajax will handle this. */
 
     router.delete('/:id', function(req, res){
         var mysql = req.app.get('mysql');
-        var sql = "DELETE FROM gardener_site WHERE id = ?";
+        var sql = "DELETE FROM workshift WHERE id = ?";
         var inserts = [req.params.id];
         sql = mysql.pool.query(sql, inserts, function(error, results, fields){
             if(error){
