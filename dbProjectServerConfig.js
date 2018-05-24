@@ -20,27 +20,13 @@ app.use('/accesses', require('./accesses.js'));
 app.use('/workshifts', require('./workshifts.js'));
 
 
-// Page handlers
+// Index Page handler
 app.get('/',function(req,res){
   var context = {};
-  context.pageTitle = "Index";
+  context.pageTitle = "📑 Index"; //other option🌿
   res.render('index1', context);
 });
 
-
-/*
-app.get('/sites',function(req,res){
-  var context = {};
-  context.pageTitle = "🌐 Sites";
-  res.render('sites', context);
-});
-
-app.get('/accesses',function(req,res){
-  var context = {};
-  context.pageTitle = "🔑 Accesses";
-  res.render('accesses', context);
-});
-*/
 
 
 app.get('/f1AboutThisSite',function(req,res){
