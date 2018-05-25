@@ -1,0 +1,16 @@
+<form action="/bedmap" method="post">
+	<fieldset>
+		<legend>CHOOSE A SITE</legend>
+		<div>
+			<label>Site: </label>
+			<select name="site">
+				{{#each sites}}
+				<option value="{{id}}">{{name}}</option>
+				{{/each}}
+			</select>
+		</div>
+		<div>
+			<input type="submit" value="View Site's BedMap">
+		</div>
+	</fieldset>
+</form>

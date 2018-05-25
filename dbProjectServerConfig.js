@@ -19,6 +19,7 @@ app.use('/sites', require('./sites.js'));
 app.use('/accesses', require('./accesses.js'));
 app.use('/workshifts', require('./workshifts.js'));
 app.use('/beds', require('./beds.js'));
+app.use('/bedmap', require('./bedmap.js'));
 
 
 // Index Page handler
