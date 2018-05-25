@@ -1,0 +1,41 @@
+
+
+table {
+    border: 1px solid black;
+ }
+
+th, td {
+    border: 1px solid black;
+    padding-left: 1em;
+    padding-right: 1em;
+ }
+
+thead th {
+    font-weight: bold;
+}
+
+tbody th {
+    font-style: italic;
+    font-weight: normal;
+}
+
+
+.outer-content {
+    background: pink;
+    width: 75%;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.inner-content {
+    background: lightblue;
+    width: 75%;
+    margin-left: 12.5%;
+    text-align: center;
+    vertical-align: middle;
+}
+
+form {
+    margin-top: 20px;
+}

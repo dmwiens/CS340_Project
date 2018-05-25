@@ -132,3 +132,16 @@ WHERE id=[bed_id_from_update_button]
 -- Delete BEDs (id from delete button)
 DELETE FROM bed WHERE id = [bed_id_from_delete_button]
 
+
+
+--
+-- QUERIES SUPPORTING THE FILTERING of GARDEN BEDS BY SITE 
+-- and DISPLAYING TOPVIEW GRAPHIC REPRESENTATION OF BEDS
+--
+
+SELECT B.id, B.name, B.site, S.name AS sname, B.length, B.width, B.location_x, B.location_y
+FROM bed B INNER JOIN site S ON B.site = S.id WHERE B.site = [bed_id_selected_from_dropdown]
+
+
+-- Note: other queries listed above for selecting all SITEs and selecting a single SITE were
+--      used for this feature
