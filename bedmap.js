@@ -53,7 +53,7 @@ module.exports = function(){
         
         var callbackCount = 0;
         var context = {};
-        context.pageTitle = "🗺 Bed Map";
+        context.pageTitle = "🔭 Bed Map";
         context.jsscripts = [];
         var mysql = req.app.get('mysql');
         getSites(res, mysql, context, complete);
@@ -79,7 +79,6 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
-                console.log(context);
                 res.render('bedmap_draw', context);
             }
         }

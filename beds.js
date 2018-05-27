@@ -75,7 +75,6 @@ module.exports = function(){
         function complete(){
             callbackCount++;
             if(callbackCount >= 2){
-                console.log(context);
                 res.render('bed_update', context);
             }
         }
