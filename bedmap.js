@@ -31,7 +31,6 @@ module.exports = function(){
 
 
     function getBedsOnSite(res, mysql, context, siteId, complete){
-        console.log("site ID in getBedsOnSite: "+ siteId);
         var sql = "SELECT B.id, B.name, B.site, S.name AS sname, B.length, B.width, B.location_x, B.location_y FROM bed B \
                     INNER JOIN site S ON B.site = S.id WHERE B.site = ?";
         var inserts = [siteId];
