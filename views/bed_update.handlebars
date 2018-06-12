@@ -1,6 +1,6 @@
 <form id="bed_update_form" action="/beds" method="put">
 	<fieldset>
-		<legend>🌱 UPDATE {{bed.name}}</legend>
+		<legend>🌿 UPDATE {{bed.name}}</legend>
 		<div>
 			<label>Name: </label>
 			<input type="text" name="name" value="{{bed.name}}">
@@ -14,19 +14,19 @@
 			</select>
 		</div>
 		<div>
-			<label>Length: </label>
+			<label>Length (m): </label>
 			<input type="number" name="length" value="{{bed.length}}">
 		</div>
 		<div>
-			<label>Width: </label>
+			<label>Width (m): </label>
 			<input type="number" name="width" value="{{bed.width}}">
 		</div>
 		<div>
-			<label>Location, X: </label>
+			<label>Location, X (m): </label>
 			<input type="number" name="location_x" value="{{bed.location_x}}">
 		</div>
 		<div>
-			<label>Location, Y: </label>
+			<label>Location, Y (m): </label>
 			<input type="number" name="location_y" value="{{bed.location_y}}">
 		</div>
 	</fieldset>

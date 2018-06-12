@@ -85,6 +85,9 @@ form {
     margin-top: 1em;
 }
 
+form div {
+    margin-top: 0.5em;
+}
 
 .submitInput {
     margin-top: 0.5em;

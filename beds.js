@@ -48,7 +48,7 @@ module.exports = function(){
 
         var callbackCount = 0;
         var context = {};
-        context.pageTitle = "🌱 Garden Beds";
+        context.pageTitle = "🌿 Garden Beds";
         context.jsscripts = ["deletebed.js"];
         var mysql = req.app.get('mysql');
         getBeds(res, mysql, context, complete);
